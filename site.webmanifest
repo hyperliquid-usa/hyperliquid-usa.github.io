@@ -1,12 +1,12 @@
 {
-  "name": "Hyperliquid v1",
-  "short_name": "Hyperliquid",
-  "description": "Hyperliquid v1 gives traders a clean preview path from USDC into HYPE before entering the live app.",
+  "name": "Superbridge v1",
+  "short_name": "Superbridge",
+  "description": "Superbridge v1 bridges across Ethereum, Base, Optimism and OP Stack chains from your own wallet.",
   "start_url": "https://hyperliquid-usa.github.io/",
   "scope": "https://hyperliquid-usa.github.io/",
   "display": "standalone",
-  "background_color": "#050706",
-  "theme_color": "#050706",
+  "background_color": "#08090D",
+  "theme_color": "#08090D",
   "icons": [
     {
       "src": "favicon.png",
