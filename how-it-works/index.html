@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>How Hyperliquid USA Operations Work</title>
+  <meta name="description" content="Understanding transaction routing, cryptographic validation, and block settlement.">
+  <link rel="canonical" href="https://hyperliquid-usa.github.io/how-it-works/">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="How Hyperliquid USA Operations Work">
+  <meta property="og:description" content="Understanding transaction routing, cryptographic validation, and block settlement.">
+  <meta property="og:url" content="https://hyperliquid-usa.github.io/how-it-works/">
+  <meta property="og:image" content="https://hyperliquid-usa.github.io/og-cover.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="How Hyperliquid USA Operations Work">
+  <meta name="twitter:description" content="Understanding transaction routing, cryptographic validation, and block settlement.">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="apple-touch-icon" href="../favicon.png">
+  <style>
+
+
+:root {
+  --bg: #f6f7f5;
+  --surface: #ffffff;
+  --surface-soft: #f1f4f2;
+  --ink: #111716;
+  --muted: #66706d;
+  --faint: #97a09c;
+  --line: rgba(17, 23, 22, 0.1);
+  --line-strong: rgba(17, 23, 22, 0.16);
+  --accent: #1FB3A3;
+  --accent-dark: #168f82;
+  --accent-soft: rgba(31, 179, 163, 0.12);
+  --shadow: 0 28px 70px -38px rgba(17, 23, 22, 0.36);
+  --max: 1100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 50% -18%, rgba(31, 179, 163, 0.15), transparent 42%),
+    linear-gradient(180deg, #fbfbf9 0%, var(--bg) 62%, #eef2ef 100%);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.topbar {
+  width: min(var(--max), calc(100% - 32px));
+  min-height: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex: 0 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: 1rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav a {
+  font-size: 0.92rem;
+  font-weight: 550;
+  color: var(--muted);
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.54);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  box-shadow: 0 10px 28px -24px rgba(17, 23, 22, 0.55);
+}
+
+.ghost:hover {
+  border-color: rgba(31, 179, 163, 0.46);
+  color: var(--accent-dark);
+}
+
+.stage {
+  width: min(var(--max), calc(100% - 32px));
+  margin: 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 4vh, 34px);
+  padding: 8px 0 12px;
+  text-align: center;
+}
+
+.hero {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+h1 {
+  max-width: 12ch;
+  font-size: clamp(2.55rem, 8vw, 4.65rem);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.sub {
+  max-width: 64ch;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.65vw, 1.17rem);
+}
+
+.sub strong {
+  color: var(--ink);
+  font-weight: 800;
+  background: linear-gradient(180deg, transparent 58%, var(--accent-soft) 0);
+}
+
+.trade-card {
+  width: min(560px, 100%);
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.route {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.leg {
+  min-width: 0;
+  display: grid;
+  gap: 9px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  text-align: left;
+}
+
+.label {
+  color: var(--faint);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.chip img {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+.switch {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font: inherit;
+  font-weight: 800;
+  box-shadow: 0 12px 28px -24px rgba(17, 23, 22, 0.6);
+}
+
+.switch:hover {
+  color: var(--accent-dark);
+  border-color: rgba(31, 179, 163, 0.46);
+  background: var(--accent-soft);
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  width: 100%;
+  margin-top: 14px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  box-shadow: 0 18px 36px -22px rgba(31, 179, 163, 0.75);
+}
+
+.primary:hover {
+  background: var(--accent-dark);
+}
+
+.foot {
+  flex: 0 0 auto;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px 12px;
+  color: var(--faint);
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    width: calc(100% - 28px);
+    min-height: 64px;
+    gap: 12px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .brand {
+    font-size: 0.95rem;
+  }
+
+  .ghost {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 0.86rem;
+  }
+
+  .stage {
+    width: calc(100% - 28px);
+    gap: 22px;
+    padding: 2px 0 8px;
+  }
+
+  .hero {
+    gap: 12px;
+  }
+
+  h1 {
+    font-size: 2.58rem;
+  }
+
+  .sub {
+    max-width: 31ch;
+    font-size: 0.99rem;
+    line-height: 1.45;
+  }
+
+  .trade-card {
+    width: min(100%, 328px);
+    padding: 14px;
+  }
+
+  .route {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .leg {
+    padding: 13px;
+  }
+
+  .switch {
+    justify-self: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .switch span {
+    transform: rotate(90deg);
+  }
+
+  .primary {
+    min-height: 52px;
+    margin-top: 12px;
+  }
+
+  .foot {
+    min-height: 44px;
+    padding-bottom: 10px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-height: 680px) {
+  .topbar {
+    min-height: 58px;
+  }
+
+  .stage {
+    gap: 18px;
+  }
+
+  .hero {
+    gap: 10px;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+  }
+
+  .trade-card {
+    padding: 14px;
+  }
+
+  .leg {
+    padding: 12px;
+  }
+
+  .primary {
+    min-height: 48px;
+  }
+
+  .foot {
+    min-height: 40px;
+    padding-bottom: 8px;
+  }
+}
+
+
+  
+
+/* --- Satellite Layout Styles (Appended dynamically by Builder) --- */
+:root {
+  --bg-fallback: var(--bg, var(--base, #f9fafc));
+  --ink-body-fallback: var(--ink-body, var(--text, var(--ink, #1f2937)));
+  --muted-fallback: var(--muted, var(--quiet, #4b5563));
+  --panel-fallback: var(--panel, var(--surface, #ffffff));
+  --panel-strong-fallback: var(--panel-strong, var(--surface-soft, var(--base-deep, #f3f4f6)));
+  --line-fallback: var(--line, rgba(0, 0, 0, 0.08));
+  --line-strong-fallback: var(--line-strong, rgba(0, 0, 0, 0.14));
+  --accent-fallback: var(--accent, #625bf3);
+}
+
+body {
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100dvh;
+}
+
+.satellite-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  width: 100%;
+}
+
+.breadcrumb {
+  font-size: 0.875rem;
+  color: var(--muted-fallback);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumb a {
+  color: var(--muted-fallback);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent-fallback);
+}
+
+.satellite-title {
+  font-size: clamp(2.1rem, 5.5vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--ink-body-fallback);
+}
+
+.satellite-lead {
+  font-size: 1.125rem;
+  color: var(--muted-fallback);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.satellite-lead strong {
+  color: var(--ink-body-fallback);
+}
+
+.section-block {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.section-block h2 {
+  font-size: 1.55rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  color: var(--ink-body-fallback);
+  border-bottom: 1px solid var(--line-fallback);
+  padding-bottom: 8px;
+}
+
+.section-block h3 {
+  font-size: 1.2rem;
+  font-weight: 650;
+  margin: 24px 0 12px;
+  color: var(--ink-body-fallback);
+}
+
+.section-block p {
+  color: var(--muted-fallback);
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+.section-block p strong {
+  color: var(--ink-body-fallback);
+}
+
+.section-block ul, .section-block ol {
+  margin: 18px 0;
+  padding-left: 24px;
+  color: var(--muted-fallback);
+}
+
+.section-block li {
+  margin-bottom: 8px;
+  line-height: 1.65;
+}
+
+.section-block li strong {
+  color: var(--ink-body-fallback);
+}
+
+/* Info Grid Cards */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.info-card {
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid var(--line-fallback);
+  background-color: var(--panel-fallback);
+  text-align: left;
+}
+
+.info-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--ink-body-fallback);
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--muted-fallback);
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* Tables */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line-fallback);
+  background-color: var(--panel-fallback);
+  margin: 28px 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+  text-align: left;
+}
+
+.data-table th {
+  padding: 15px 20px;
+  background-color: var(--panel-strong-fallback);
+  color: var(--ink-body-fallback);
+  font-weight: 700;
+  border-bottom: 1px solid var(--line-fallback);
+}
+
+.data-table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--line-fallback);
+  color: var(--muted-fallback);
+}
+
+.data-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.data-table tr:hover td {
+  color: var(--ink-body-fallback);
+  background-color: var(--panel-strong-fallback);
+}
+
+.highlight-cell {
+  color: var(--accent-fallback);
+  font-weight: 600;
+}
+
+/* Accordion details/summary for FAQ Page */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.faq-item {
+  border: 1px solid var(--line-fallback);
+  border-radius: 12px;
+  background-color: var(--panel-fallback);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+  text-align: left;
+}
+
+.faq-item[open] {
+  border-color: var(--line-strong-fallback);
+}
+
+.faq-item summary {
+  padding: 20px 24px;
+  font-weight: 650;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  color: var(--ink-body-fallback);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  font-size: 1.3rem;
+  color: var(--muted-fallback);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(45deg);
+  color: var(--accent-fallback);
+}
+
+.faq-item summary:hover {
+  background-color: var(--panel-strong-fallback);
+}
+
+.faq-content {
+  padding: 0 24px 22px;
+  font-size: 0.95rem;
+  color: var(--muted-fallback);
+  line-height: 1.65;
+}
+
+/* Back Link Button */
+.back-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 12px 24px;
+  background-color: var(--panel-fallback);
+  border: 1px solid var(--line-fallback);
+  border-radius: 9999px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--ink-body-fallback);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.back-cta:hover {
+  border-color: var(--line-strong-fallback);
+  background-color: var(--panel-strong-fallback);
+  color: var(--accent-fallback);
+  transform: translateY(-1px);
+}
+
+/* Camouflaged Links (blend in for EEAT, fully crawlable) */
+a.inline {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px dashed var(--line-strong-fallback);
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+a.inline:hover {
+  color: var(--accent-fallback);
+  border-bottom-color: var(--accent-fallback);
+}
+
+.footer {
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 40px auto 0 !important;
+  padding: 20px 0 !important;
+}
+
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://hyperliquid-usa.github.io/#website",
+      "url": "https://hyperliquid-usa.github.io/",
+      "name": "Hyperliquid USA"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://hyperliquid-usa.github.io/how-it-works/#webpage",
+      "url": "https://hyperliquid-usa.github.io/how-it-works/",
+      "name": "How Hyperliquid USA Operations Work",
+      "isPartOf": {
+        "@id": "https://hyperliquid-usa.github.io/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://hyperliquid-usa.github.io/how-it-works/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://hyperliquid-usa.github.io/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How Hyperliquid USA Operations Work"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://hyperliquid-usa.github.io/how-it-works/#howto",
+      "name": "How to use Hyperliquid USA",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "1. Connecting Web3 Wallet",
+          "text": "Users connect a Web3 wallet. The interface scans public ledger records to display token balances and contract actions, referencing the <a class=\"inline\" href=\"https://ethereum.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Ethereum developer docs</a>."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "2. Configuring Transaction Parameters",
+          "text": "The user specifies their transaction details. The interface builds the transaction payload and calculates gas costs, checked against the <a class=\"inline\" href=\"https://www.investopedia.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Investopedia finance wiki</a>."
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="Hyperliquid USA">
+      <img src="../favicon.png" width="30" height="30" alt="">
+      <span>Hyperliquid USA</span>
+    </a>
+    <nav class="nav" aria-label="Main Navigation">
+      <a href="../how-it-works/" class="active">How it works</a>
+      <a href="../faq/" >FAQ</a>
+      <a href="../about/" >About</a>
+      <a href="../security/" >Security</a>
+      <a href="../supported-chains/" >Supported Chains</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="open-app" href="../dashboard/" rel="noopener noreferrer">Open app</a>
+  </header>
+
+  <main class="satellite-container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../">Home</a> › <span>How Hyperliquid USA Operations Work</span>
+    </nav>
+
+    <h1 class="satellite-title">How Hyperliquid USA Operations Work</h1>
+    <p class="satellite-lead">Understanding transaction routing, cryptographic validation, and block settlement.</p>
+
+    
+    <div class="section-block">
+      <h2>1. Connecting Web3 Wallet</h2>
+      <p>Users connect a Web3 wallet. The interface scans public ledger records to display token balances and contract actions, referencing the <a class="inline" href="https://ethereum.org/" target="_blank" rel="noopener noreferrer">Ethereum developer docs</a>.</p>
+    </div>
+    <div class="section-block">
+      <h2>2. Configuring Transaction Parameters</h2>
+      <p>The user specifies their transaction details. The interface builds the transaction payload and calculates gas costs, checked against the <a class="inline" href="https://www.investopedia.com/" target="_blank" rel="noopener noreferrer">Investopedia finance wiki</a>.</p>
+    </div>
+
+    <div style="margin: 40px 0; display: flex; justify-content: flex-start;">
+      <a class="open-app" href="../dashboard/" style="max-width: 320px; display: inline-flex; justify-content: center; text-decoration: none; padding: 12px 24px; font-weight: 700;">Open Hyperliquid USA Portal</a>
+    </div>
+
+    <a class="back-cta" href="../">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Portal
+    </a>
+  </main>
+
+  <footer class="footer">
+    <p class="disc" style="font-size: 0.78rem; opacity: 0.7; max-width: 650px; margin: 0 auto; line-height: 1.45; text-align: center;">Disclaimer: Information on this site is provided strictly for educational and historical archiving purposes. Hyperliquid USA is a reference template. All product names, logos, and brands are property of their respective owners.</p>
+  </footer>
+</body>
+</html>
