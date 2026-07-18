@@ -1,0 +1,74 @@
+# Hyperliquid USA
+> Hyperliquid USA is an independent, non-custodial informational dashboard covering Hyperliquid and its U.S. access restrictions without executing trades or holding funds.
+
+## What is Hyperliquid USA
+Hyperliquid USA is not an official U.S. edition of Hyperliquid or a regulated exchange. It explains Hyperliquid, a purpose-built layer-one blockchain supporting onchain perpetual-futures and spot order books through HyperCore plus Ethereum-compatible applications through HyperEVM. The dashboard consolidates network mechanics, market information, eligibility rules, and risks that otherwise require several sources. Unlike a trading interface, it is read-only and requires no deposits or transaction signatures.
+
+## How it works
+1. Visitors review public blockchain data and documentation without connecting a wallet.
+2. An eligible user accessing Hyperliquid’s official interface connects an EVM wallet or uses email login, signs a gasless authorization, and deposits supported collateral.
+3. Signed orders reach an API server, are forwarded to a node, and execute on HyperCore under HyperBFT consensus; matching, cancellations, funding, margin checks, and liquidations are recorded onchain.
+4. Native USDC deposits and withdrawals use the Arbitrum bridge, whose state changes require signatures representing more than two-thirds of validator staking power.
+5. U.S. users should treat this dashboard as informational: Hyperliquid’s official Interface Terms classify specified U.S.-connected persons and entities as Restricted Persons.
+
+## Key facts
+- Hyperliquid combines HyperCore and HyperEVM in one state secured by HyperBFT proof-of-stake consensus.
+- HyperCore provides fully onchain, price-time-priority order books for spot assets and perpetual contracts.
+- HyperEVM uses mainnet chain ID `999`; its testnet uses chain ID `998`.
+- HYPE is used for staking on HyperCore and is the 18-decimal native gas asset on HyperEVM.
+- HIP-1 is HyperCore’s capped-supply fungible-token standard; HyperEVM applications can deploy ERC-20 contracts.
+- Perpetual contracts have no expiration and exchange peer-to-peer funding payments hourly.
+- HyperCore trading actions do not require wallet gas, but maker/taker fees depend on the current fee schedule and rolling trading volume.
+- Hyperliquid is non-custodial: users authorize actions with their wallet keys, while deposited balances are accounted for by protocol state.
+- HyperCore transactions receive one-block finality; native bridge deposits normally credit quickly and withdrawals generally finalize within minutes.
+
+## Common questions
+**Can U.S. users trade through the official Hyperliquid interface?**  
+No. Its current Terms prohibit Restricted Persons, including persons or entities residing, located, incorporated, or registered in the United States, from using the Interface. They also prohibit circumventing restrictions.
+
+**Does this dashboard hold funds or require a wallet?**  
+No. It is an independent informational resource and does not custody assets, request seed phrases, or sign transactions.
+
+**Is Hyperliquid safe?**  
+Its bridge has received Zellic audits, but users still bear wallet-compromise, phishing, bridge, validator, oracle, network, smart-contract, and liquidity risks.
+
+**What fees apply?**  
+The dashboard charges no trading fee. Hyperliquid applies separate volume-tiered spot and perpetual maker/taker schedules; leveraged positions may also pay or receive hourly funding.
+
+**Which assets and chains are supported?**  
+HyperCore supports spot assets and perpetual markets, while HyperEVM supports EVM applications. The native bridge accepts native USDC from Arbitrum; additional deposit routes change over time and should be checked in official onboarding documentation.
+
+**How does someone start?**  
+U.S. visitors can use this dashboard without a wallet. Eligible users should verify the current Terms, visit the official interface, connect a supported wallet or email account, enable trading, and deposit through a documented route.
+
+**What is the main trading risk?**  
+Leverage can trigger liquidation when account equity falls below maintenance requirements; cross margin can expose shared collateral across positions. Funding, slippage, oracle movement, and network disruption can compound losses.
+
+## App
+- Dashboard: https://hyperliquid-usa.github.io/
+- App: https://hyperliquid-usa.github.io/dashboard/
+
+## Official resources
+Hyper Foundation: https://hyperfoundation.org/
+Hyperliquid Interface: https://app.hyperliquid.xyz/
+Interface Terms: https://app.hyperliquid.xyz/terms
+Hyperliquid Documentation: https://hyperliquid.gitbook.io/hyperliquid-docs
+Trading Onboarding: https://hyperliquid.gitbook.io/hyperliquid-docs/onboarding/how-to-start-trading
+Trading Fees: https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees
+Protocol Risks: https://hyperliquid.gitbook.io/hyperliquid-docs/risks
+HyperEVM Developer Documentation: https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm
+Audit Reports: https://hyperliquid.gitbook.io/hyperliquid-docs/audits
+Official GitHub: https://github.com/hyperliquid-dex
+Bridge Contracts: https://github.com/hyperliquid-dex/contracts
+Official X: https://x.com/HyperliquidX
+Hyper Foundation X: https://x.com/HyperFND
+
+## Data & references
+HypurrScan Explorer: https://hypurrscan.io/
+Arbiscan Deposit Bridge: https://arbiscan.io/address/0x2df1c51e09aecf9cacb7bc98cb1742757f163df7
+DeFiLlama Hyperliquid L1: https://defillama.com/chain/hyperliquid-l1
+CoinGecko HYPE: https://www.coingecko.com/en/coins/hyperliquid
+CoinGecko Hyperliquid Chain: https://www.coingecko.com/en/chains/hyperliquid
+ChainList HyperEVM: https://chainlist.org/chain/999
+EIP-1559 Standard: https://eips.ethereum.org/EIPS/eip-1559
+Wikipedia: https://en.wikipedia.org/wiki/Hyperliquid
